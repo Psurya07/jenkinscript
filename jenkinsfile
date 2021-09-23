@@ -3,14 +3,14 @@ pipeline {
 
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
-        maven "Maven3.8"
+        maven "maven3.8.2"
     }
 
     stages {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/capgteam/bankapplicationrepo.git'
+                git 'https://github.com/Psurya07/bank-project-repo-assignment-from-sts.git'
 
                 // Run Maven on a Unix agent.
                 //sh "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -28,7 +28,7 @@ pipeline {
                 }
             }
         }
-         stage('test'){
+        stage('test'){
             steps{
                 bat "mvn -f Day1-BankApp/pom.xml test"
             }
@@ -41,8 +41,8 @@ pipeline {
         stage('deploy'){
             steps{
                 echo "Deploy into tomcat"
-                build 'deploy-war-from-jenkins-to-tomcat'
+                build 'bankapp-tomcat-development'
             }
-        }
     }
+}
 }
